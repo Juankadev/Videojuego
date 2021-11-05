@@ -3,7 +3,7 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1000, 600), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(1000, 600), "SFML works!!");
 
 
     //TEXTURAS
