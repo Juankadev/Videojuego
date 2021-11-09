@@ -50,8 +50,9 @@ int main()
     //OBJETOS
     sf::Sprite car;
     car.scale(0.5, 0.5);
-    car.setOrigin(car.getScale().x / 2, car.getScale().y / 2);
+    car.setOrigin(car.getGlobalBounds().width / 2, 0);
     car.setTexture(texture_car);
+    car.setPosition(500, 100);
 
     
 
@@ -72,9 +73,24 @@ int main()
     arbusto.setPosition(sf::Vector2f(300, 300));
 
 
-    float x = 200;
-    float y = 450;
+    sf::Font font;
+    font.loadFromFile("assets/game.ttf");
+
+    sf::Text text;
+    // select the font
+    text.setFont(font); // font is a sf::Font
+    // set the string to display
+    text.setString("Hello world");
+    // set the character size
+    text.setCharacterSize(24); // in pixels, not points!
+    // set the color
+    text.setFillColor(sf::Color::Green);
+    // set the text style
+    text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+
+
     float rotar = 0;
+    float velocity = 1;
 
     while (window.isOpen())
     {
@@ -88,14 +104,14 @@ int main()
         
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
-            //x -= .7f;
-            car.setRotation(rotar -= .2f);
+            car.move(-velocity,0);
+            //car.setRotation(rotar -= .5f);
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-            //x += .7f;
-            car.setRotation(rotar += .2f);
+            car.move(velocity, 0);
+            //car.setRotation(rotar += .5f);
 
             /*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
             {
@@ -114,49 +130,109 @@ int main()
             }*/
         }
 
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+        {
+            car.move(0,-velocity);
+            //car.setRotation(rotar -= .5f);
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+        {
+            car.move(0,velocity);
+            //car.setRotation(rotar -= .5f);
+        }
+
         
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right) == false && sf::Keyboard::isKeyPressed(sf::Keyboard::Left) == false)
+        /*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right) == false && sf::Keyboard::isKeyPressed(sf::Keyboard::Left) == false)
         {
             y -= .5f;
-            if (car.getRotation() != 0)
+
+            if (car.getRotation() > 0.5 && car.getRotation() < 180)
             {
                 car.setRotation(rotar -= .5f); 
                 cout << car.getRotation() << endl;
             }
 
-            if (car.getRotation() > -0.5 && car.getRotation() < 0.5)
+            if (car.getRotation() > 180 && car.getRotation() < 360)
+            {
+                car.setRotation(rotar += .5f);
+                cout << car.getRotation() << endl;
+            }
+
+            if (car.getRotation() >= -0.5 && car.getRotation() <= 0.5)
             {
                 car.setRotation(0);
             }
-            
+           
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right) == false && sf::Keyboard::isKeyPressed(sf::Keyboard::Left) == false)
         {
             y += .5f;
 
-            /*if (car.getRotation() != 180)
+            if (car.getRotation() > 0.5 && car.getRotation() < 180)
             {
                 car.setRotation(rotar += .5f);
                 cout << car.getRotation() << endl;
             }
 
-            if (car.getRotation() > -0.5 && car.getRotation() < 0.5)
+            if (car.getRotation() > 180 && car.getRotation() < 360)
+            {
+                car.setRotation(rotar -= .5f);
+                cout << car.getRotation() << endl;
+            }
+
+            if (car.getRotation() >= 180 && car.getRotation() <= 181)
             {
                 car.setRotation(180);
-            }*/
-        }
+            }
+        }*/
         
+
+        if(car.getPosition().x < 0)
+        { 
+            car.setPosition(0, car.getPosition().y);
+        }
+
+        if (car.getPosition().y < 0)
+        {
+            car.setPosition(car.getPosition().x, 0);
+        }
+
+        if (car.getPosition().x + car.getGlobalBounds().width > 1000)
+        {
+            car.setPosition(1000 - car.getGlobalBounds().width, car.getPosition().y);
+        }
+
+        if (car.getPosition().y + car.getGlobalBounds().height > 600)
+        {
+            car.setPosition(car.getPosition().x ,600 - car.getGlobalBounds().height);
+        }
+
+
+
+        if (car.getGlobalBounds().intersects(arbusto.getGlobalBounds()))
+        {
+            arbusto.setColor(sf::Color(0,128,0,100));
+        }
+        else
+        {
+            arbusto.setColor(sf::Color(0,128,0));
+        }
+
+
+
 
         window.clear();
 
-        car.setPosition(x, y);
 
+        //DRAW
         window.draw(fondo);
         for (int i = 0; i < 13; i++)
         {
             window.draw(lines[i]);
         }
+        window.draw(text);
         window.draw(car);
         window.draw(arbusto);
         window.display();
