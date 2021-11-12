@@ -142,7 +142,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Auto.cpp" />
+    <ClCompile Include="Collisionable.cpp" />
+    <ClCompile Include="Cuadrante.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Rectangulo.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Auto.h" />
+    <ClInclude Include="Collisionable.h" />
+    <ClInclude Include="Cuadrante.h" />
+    <ClInclude Include="Rectangulo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
