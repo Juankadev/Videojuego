@@ -86,6 +86,12 @@ void Auto::update()
         
     }
 
+    else
+    {
+        _velocityY = 0;
+        _velocityX = 0;
+    }
+
 
 
 
@@ -277,7 +283,7 @@ sf::Vector2f Auto::getPosition()
     return sf::Vector2f(_sprite.getPosition().x, _sprite.getPosition().y);
 }
 
-sf::Vector2f Auto::getView1()
+/*sf::Vector2f Auto::getView1()
 {
     return sf::Vector2f(view1.getSize());
-}
+}*/

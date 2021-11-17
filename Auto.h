@@ -19,6 +19,6 @@ class Auto: public sf::Drawable, public Collisionable
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 		sf::FloatRect getBounds() const override;
 		sf::Vector2f getPosition();
-		sf::Vector2f getView1();
+		//sf::Vector2f getView1();
 };
 
