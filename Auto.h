@@ -30,5 +30,7 @@ class Auto: public sf::Drawable, public Collisionable
 		sf::Vector2f getPosition();
 		//sf::Vector2f getView1();
 		sf::Sound getSoundChoque();
+		void posicionInicial();
+
 };
 

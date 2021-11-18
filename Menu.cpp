@@ -80,7 +80,7 @@ bool Menu::seleccionar_opcion()
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 	{
-		//sound.play();
+		sound.play();
 		return true;
 	}
 

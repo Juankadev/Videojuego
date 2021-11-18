@@ -36,9 +36,9 @@ int main()
     if (!music.openFromFile("assets/music.wav"))
     { cout << "Error al cargar la musica" << endl; }
 
-    music.setVolume(30);
+    music.setVolume(5);
     music.setLoop(true);
-    //music.play();
+    music.play();
 
 
     while (window.isOpen())
@@ -84,27 +84,33 @@ int main()
         {
             //fondo.setFillColor(sf::Color(255,255,255,50));
             //car.getSoundChoque().play();
-            dibujar = false;
+            //dibujar = false;
+            car.posicionInicial();
         }
-        else if (car.getBounds().intersects(rect.getBounds1()))
+        if (car.getBounds().intersects(rect.getBounds1()))
         {
-            dibujar = false;
+            //dibujar = false;
+            car.posicionInicial();
         }
-        else if (car.getBounds().intersects(rect.getBounds2()))
+        if (car.getBounds().intersects(rect.getBounds2()))
         {
-            dibujar = false;
+            //dibujar = false;
+            car.posicionInicial();
         }
-        else if (car.getBounds().intersects(rect.getBounds3()))
+        if (car.getBounds().intersects(rect.getBounds3()))
         {
-            dibujar = false;
+            //dibujar = false;
+            car.posicionInicial();
         }
-        else if (car.getBounds().intersects(rect.getBounds4()))
+        if (car.getBounds().intersects(rect.getBounds4()))
         {
-            dibujar = false;
+            //dibujar = false;
+            car.posicionInicial();
         }
-        else if (car.getBounds().intersects(rect.getBounds5()))
+        if (car.getBounds().intersects(rect.getBounds5()))
         {
-            dibujar = false;
+            //dibujar = false;
+            car.posicionInicial();
         }
 
 
@@ -120,7 +126,7 @@ int main()
             //menu.draw(window);
             window.draw(fondo);
             //window.draw(cuadrante); //ver colision cuadrante
-            //window.draw(rect); //ver colisiones
+            window.draw(rect); //ver colisiones
             window.draw(car);
             
         }

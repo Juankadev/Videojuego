@@ -268,7 +268,7 @@ void Auto::update()
 
     float direccion = _sprite.getRotation();
     //velocity
-    if (up)
+    /*if (up)
     {
         _posY = -_speed;
         if (right)
@@ -283,16 +283,21 @@ void Auto::update()
         }
 
     }
-    if (down) _speed;
+    //if (down) _speed;
     //if (left) if(up || down) _velocityX = -0.3;
     //if (right) _velocityX = 0.3;
 
    //_posX += sin(_angle);
    //_posY -= cos(_angle);
-
+   */
    //rotation
-   if (_velocityY != 0 && _velocityX !=0  && left) _sprite.setRotation(_sprite.getRotation() - 0.1);;
-   if (_velocityY != 0 && _velocityX != 0 && right) _sprite.setRotation(_sprite.getRotation() + 0.1);;
+   //if (_velocityY != 0 && _velocityX !=0  && left) _sprite.setRotation(_sprite.getRotation() - 0.1);;
+   //if (_velocityY != 0 && _velocityX != 0 && right) _sprite.setRotation(_sprite.getRotation() + 0.1);;
+
+   if (up) _posY = -1;
+   if (down) _posY = 1;
+   if (left) _posX = -1;
+   if (right) _posX = 1;
 
     _sprite.move(_posX, _posY);
     
@@ -340,6 +345,12 @@ sf::Sound Auto::getSoundChoque()
 {
     return choque;
 }
+
+void Auto::posicionInicial()
+{
+    _sprite.setPosition(500, 500);
+}
+
 
 /*sf::Vector2f Auto::getView1()
 {
