@@ -15,7 +15,9 @@ Cuadrante::Cuadrante()
 {
     _texture.loadFromFile("assets/cuadrante.png");
     _cuadrante.setTexture(_texture);
-    _cuadrante.setPosition(350, 100);
+    _cuadrante.setPosition(172, 475);
+    _cuadrante.setScale({0.42,0.59});
+    _cuadrante.setColor(sf::Color(255, 255, 255,100));
     //_cuadrante.
 
 }

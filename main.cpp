@@ -23,13 +23,13 @@ int main()
     Cuadrante cuadrante;
     Menu menu;
     FinNivel win;
-
+    
     bool dibujar = false;
     bool ganaste = false;
     
     sf::RectangleShape fondo(sf::Vector2f(600, 600));
     sf::Texture texturefondo;
-    texturefondo.loadFromFile("assets/fondo2.png");
+    texturefondo.loadFromFile("assets/Level1.png");
     fondo.setTexture(&texturefondo);
     
     sf::Music music;
@@ -38,7 +38,7 @@ int main()
 
     music.setVolume(30);
     music.setLoop(true);
-    music.play();
+    //music.play();
 
 
     while (window.isOpen())
@@ -61,9 +61,10 @@ int main()
         
 
         //updates
-        car.update();   
+        car.update();
+        menu.animationText();
 
-        //collision
+        //colision cuadrante para estacionar
         if (cuadrante.getBounds().top < car.getBounds().top) //CALCULOS PARA SABER SI EL AUTO ENTRO AL CUADRANTE
         {
             if (cuadrante.getBounds().left < car.getBounds().left)
@@ -78,6 +79,35 @@ int main()
                 }
             }      
         }
+        //colision objetos
+        if (car.getBounds().intersects(rect.getBounds()))
+        {
+            //fondo.setFillColor(sf::Color(255,255,255,50));
+            //car.getSoundChoque().play();
+            dibujar = false;
+        }
+        else if (car.getBounds().intersects(rect.getBounds1()))
+        {
+            dibujar = false;
+        }
+        else if (car.getBounds().intersects(rect.getBounds2()))
+        {
+            dibujar = false;
+        }
+        else if (car.getBounds().intersects(rect.getBounds3()))
+        {
+            dibujar = false;
+        }
+        else if (car.getBounds().intersects(rect.getBounds4()))
+        {
+            dibujar = false;
+        }
+        else if (car.getBounds().intersects(rect.getBounds5()))
+        {
+            dibujar = false;
+        }
+
+
         
         //
         window.clear();
@@ -89,15 +119,17 @@ int main()
         {
             //menu.draw(window);
             window.draw(fondo);
-            window.draw(cuadrante);
+            //window.draw(cuadrante); //ver colision cuadrante
+            //window.draw(rect); //ver colisiones
             window.draw(car);
             
         }
-        else
+        else //dibujar=false
         {
             window.draw(menu);
         }
 
+        //dibujar texto
         if (ganaste == true)
         {
             window.draw(win);

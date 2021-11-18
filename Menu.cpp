@@ -24,13 +24,15 @@ Menu::Menu()
 		// error...
 	}
 
+	scale = 0.0005;
+	sumar = true;
 
 	_textPlay.setFont(_font);
 	_textPlay.setString("Jugar");
 	_textPlay.setCharacterSize(30);
 	_textPlay.setFillColor(sf::Color::Yellow);
 	_textPlay.setOutlineColor(sf::Color::Black);
-	_textPlay.setOutlineThickness(3);
+	_textPlay.setOutlineThickness(2);
 	_textPlay.setPosition(230,380);
 
 	//_textControls.setFont(_font);
@@ -49,8 +51,6 @@ Menu::Menu()
 	//_textExit.setOutlineThickness(3);
 	//_textExit.setPosition(420,380);
 
-
-	//_textPlay.setOrigin(_textPlay.get().width / 2, _textPlay.getGlobalBounds().height / 2);
 
 	//_textPlay.setStyle(sf::Text::Bold);
 	//_textControls.setStyle(sf::Text::Bold | sf::Text::Underlined);
@@ -85,4 +85,24 @@ bool Menu::seleccionar_opcion()
 	}
 
 	return false;
+}
+
+void Menu::animationText()
+{
+	
+	if (_textPlay.getScale().x <= 1.2 && _textPlay.getScale().y <= 1.2 && sumar==true)
+	{
+		_textPlay.setScale(_textPlay.getScale().x + scale, _textPlay.getScale().y + scale);
+	}
+	else
+	{
+		sumar = false;
+		_textPlay.setScale(_textPlay.getScale().x - scale, _textPlay.getScale().y - scale);
+
+		if (_textPlay.getScale().x <= 1 && _textPlay.getScale().y <= 1)
+		{
+			sumar = true;
+		}
+	}
+
 }

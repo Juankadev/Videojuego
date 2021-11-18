@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Collisionable.h"
 
 class Auto: public sf::Drawable, public Collisionable
@@ -12,6 +13,14 @@ class Auto: public sf::Drawable, public Collisionable
 		float _angle;
 		float _maxVelocity;
 		sf::View view1;
+		sf::Music motorfx;
+		sf::Sound choque;
+		sf::SoundBuffer bufferchoque;
+		bool reproducir;
+		int contarrepro;
+		float _posY;
+		float _posX;
+		float _speed;
 
 	public:
 		Auto();
@@ -20,5 +29,6 @@ class Auto: public sf::Drawable, public Collisionable
 		sf::FloatRect getBounds() const override;
 		sf::Vector2f getPosition();
 		//sf::Vector2f getView1();
+		sf::Sound getSoundChoque();
 };
 

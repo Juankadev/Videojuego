@@ -11,6 +11,7 @@ class Menu: public sf::Drawable
 		sf::Text _textControls;
 		sf::Text _textExit;
 		sf::Font _font;
+		float scale, sumar;
 		bool opc1, opc2, opc3;
 		sf::SoundBuffer buffer;
 		sf::Sound sound;
@@ -20,5 +21,6 @@ class Menu: public sf::Drawable
 		Menu();
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 		bool seleccionar_opcion();
+		void animationText();
 };
 

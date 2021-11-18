@@ -1,12 +1,16 @@
 #include "Auto.h"
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 Auto::Auto()
 {
     _velocityX = 0;
     _velocityY = 0;
+    _speed = 0.1;
     _maxVelocity = 0.7;
+    _angle = 0.01;
+    _sprite.setScale(1.1, 1.1);
     //view1.setSize(200.f, 200.f);
 
     //RANDOM TEXTURE
@@ -17,13 +21,13 @@ Auto::Auto()
     switch (ran)
     {
     case 1:
-        _texture.loadFromFile("assets/car3_blue.png");
+        _texture.loadFromFile("assets/car6_purple.png");
         break;
     case 2:
-        _texture.loadFromFile("assets/car3_green.png");
+        _texture.loadFromFile("assets/car6_yellow.png");
         break;
     case 3:
-        _texture.loadFromFile("assets/car3_orange.png");
+        _texture.loadFromFile("assets/car6_red.png");
         break;
     default:
         break;
@@ -31,8 +35,21 @@ Auto::Auto()
 
 
     _sprite.setTexture(_texture);
-    _sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
+    //_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
     _sprite.setPosition(500, 500);
+
+    /*if(!motorfx.openFromFile("assets/carmotor.ogg"))
+    {
+        cout << "Error al cargar sonido de auto" << endl;
+    }*/
+    //motorfx.setVolume(100);
+    //contarrepro = 0;
+    //reproducir = true;
+
+    if (!bufferchoque.loadFromFile("assets/carmotor.ogg")) {
+        cout << "Error sound choque" << endl;
+    }
+    choque.setBuffer(bufferchoque);
 }
 
 
@@ -40,7 +57,11 @@ Auto::Auto()
 void Auto::update()
 {
     //MOVIMIENTO
+    _velocityX = 0.1;
+    _velocityY = 0.1;
 
+    _posY = 0;
+    _posX = 0;
     bool up=0, down=0, left=0, right=0;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))      up = 1;
@@ -49,9 +70,13 @@ void Auto::update()
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))   right = 1;
 
     //
-    if (up)
+    /*if (up)
     {
-
+        if (reproducir == true && contarrepro==0)
+        {
+            motorfx.play();
+            contarrepro = 1;
+        }
         //if (_sprite.getRotation() > 90 && _sprite.getRotation() <= 270)
         //{
             if (_velocityY > -_maxVelocity)
@@ -66,7 +91,7 @@ void Auto::update()
             {
                 _velocityY -= 0.001f;
             }
-        }*/
+        }
         
         //cout << _velocityY << endl;
         
@@ -82,7 +107,7 @@ void Auto::update()
             _velocityX -= 0.001f;
             _sprite.setRotation(_sprite.getRotation() - 0.2);  
         }
-
+       
         
     }
 
@@ -90,11 +115,20 @@ void Auto::update()
     {
         _velocityY = 0;
         _velocityX = 0;
+        //reproducir = false;
+        //contarrepro = 0;
+        //motorfx.stop();
     }
 
+    
+
+    /*if (reproducir == true)
+    {
+        motorfx.play();
+    }*/
 
 
-
+    /*
     if (down)
     {
         //if (_sprite.getRotation() > 90 && _sprite.getRotation() <= 270)
@@ -128,10 +162,10 @@ void Auto::update()
             _sprite.setRotation(_sprite.getRotation() - 0.2);
         }
 
-        */
+        
     }
-
-
+    */
+   
 
     //FRICCION UP
     /*
@@ -167,14 +201,6 @@ void Auto::update()
     */
 
 
-
-
-
-
-
-
-
-    
 
     /*
     if (left && !up)
@@ -240,9 +266,36 @@ void Auto::update()
     */
 
 
-    _sprite.move(_velocityX, _velocityY);
+    float direccion = _sprite.getRotation();
+    //velocity
+    if (up)
+    {
+        _posY = -_speed;
+        if (right)
+        {
+            _posY = 0;
+            _posX = _speed;
+        }
+        if (left)
+        {
+            _posY = +_speed;
+            _posX = -_speed;
+        }
 
-    //_sprite.getGlobalBou
+    }
+    if (down) _speed;
+    //if (left) if(up || down) _velocityX = -0.3;
+    //if (right) _velocityX = 0.3;
+
+   //_posX += sin(_angle);
+   //_posY -= cos(_angle);
+
+   //rotation
+   if (_velocityY != 0 && _velocityX !=0  && left) _sprite.setRotation(_sprite.getRotation() - 0.1);;
+   if (_velocityY != 0 && _velocityX != 0 && right) _sprite.setRotation(_sprite.getRotation() + 0.1);;
+
+    _sprite.move(_posX, _posY);
+    
     
 
     //LIMITES
@@ -283,7 +336,14 @@ sf::Vector2f Auto::getPosition()
     return sf::Vector2f(_sprite.getPosition().x, _sprite.getPosition().y);
 }
 
+sf::Sound Auto::getSoundChoque()
+{
+    return choque;
+}
+
 /*sf::Vector2f Auto::getView1()
 {
     return sf::Vector2f(view1.getSize());
 }*/
+
+
