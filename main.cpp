@@ -18,19 +18,19 @@ int main()
     sf::RenderWindow window(sf::VideoMode(600, 600), "SFML works!!");
     sf::View view(sf::FloatRect(600.f, 600.f, 600.f, 600.f));
 
-    Auto car;
-    Rectangulo rect;
-    Cuadrante cuadrante;
+    //Auto car;
+    //Rectangulo rect;
+    //Cuadrante cuadrante;
     Menu menu;
     FinNivel win;
     
     bool dibujar = false;
     bool ganaste = false;
     
-    sf::RectangleShape fondo(sf::Vector2f(600, 600));
-    sf::Texture texturefondo;
-    texturefondo.loadFromFile("assets/Level1.png");
-    fondo.setTexture(&texturefondo);
+    //sf::RectangleShape fondo(sf::Vector2f(600, 600));
+    //sf::Texture texturefondo;
+    //texturefondo.loadFromFile("assets/Level1.png");
+    //fondo.setTexture(&texturefondo);
     
     sf::Music music;
     if (!music.openFromFile("assets/music.wav"))
@@ -38,7 +38,7 @@ int main()
 
     music.setVolume(5);
     music.setLoop(true);
-    music.play();
+    //music.play();
 
 
     while (window.isOpen())
