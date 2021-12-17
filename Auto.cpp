@@ -7,8 +7,8 @@ Auto::Auto()
 {
     _velocityX = 0;
     _velocityY = 0;
-    _speed = 0.1;
-    _maxVelocity = 0.7;
+    _speed = 0.05;
+    _maxVelocity = 0.1;
     _angle = 0.01;
     _sprite.setScale(1.1, 1.1);
     //view1.setSize(200.f, 200.f);
@@ -36,7 +36,6 @@ Auto::Auto()
 
     _sprite.setTexture(_texture);
     //_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-    _sprite.setPosition(500, 500);
 
     /*if(!motorfx.openFromFile("assets/carmotor.ogg"))
     {
@@ -346,9 +345,19 @@ sf::Sound Auto::getSoundChoque()
     return choque;
 }
 
-void Auto::posicionInicial()
+void Auto::posicionInicial(float x, float y)
 {
-    _sprite.setPosition(500, 500);
+    _sprite.setPosition(x, y);
+}
+
+void Auto::setPos(float x, float y)
+{
+    _sprite.setPosition(x, y);
+}
+
+void Auto::setRot(float r)
+{
+    _sprite.setRotation(r);
 }
 
 
@@ -356,5 +365,4 @@ void Auto::posicionInicial()
 {
     return sf::Vector2f(view1.getSize());
 }*/
-
 

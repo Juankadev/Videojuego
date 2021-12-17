@@ -14,6 +14,8 @@ class Cuadrante: public sf::Drawable, public Collisionable
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 		//void draw(sf::RenderWindow& window);
 		sf::FloatRect getBounds() const override;
+		void setPos(float x, float y);
+		void setRot(float r);
 		
 };
 

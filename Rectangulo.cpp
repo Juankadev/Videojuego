@@ -2,7 +2,7 @@
 
 Rectangulo::Rectangulo()
 {
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 6; i++)
     {
         _rect[i].setFillColor(sf::Color(255, 0, 0, 50));
     }
@@ -10,8 +10,11 @@ Rectangulo::Rectangulo()
     _rect[0].setSize({420,40});
     _rect[0].setPosition(0, 0);
     //
+    _rect[5].setSize({ 420,40 });
+    _rect[5].setPosition(0, 5);
+    //
     _rect[1].setSize({ 420,40 });
-    _rect[1].setPosition(0, 200);
+    _rect[1].setPosition(0, 220);
     //
     _rect[2].setSize({ 330,100 });
     _rect[2].setPosition(65, 240);
@@ -30,10 +33,11 @@ Rectangulo::Rectangulo()
 
 void Rectangulo::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 6; i++)
     {
         target.draw(_rect[i], states);
     }
+    target.draw(_circ, states);
 }
 
 sf::FloatRect Rectangulo::getBounds() const
@@ -64,4 +68,81 @@ sf::FloatRect Rectangulo::getBounds4()
 sf::FloatRect Rectangulo::getBounds5()
 {
     return _circ.getGlobalBounds();
+}
+
+sf::FloatRect Rectangulo::getBounds6()
+{
+    return _rect[5].getGlobalBounds();
+}
+
+void Rectangulo::setPosRect1(float x, float y)
+{
+    _rect[0].setPosition(x, y);
+}
+
+void Rectangulo::setPosRect2(float x, float y)
+{
+    _rect[1].setPosition(x, y);
+}
+
+void Rectangulo::setPosRect3(float x, float y)
+{
+    _rect[2].setPosition(x, y);
+}
+
+void Rectangulo::setPosRect4(float x, float y)
+{
+    _rect[3].setPosition(x, y);
+}
+
+void Rectangulo::setPosRect5(float x, float y)
+{
+    _rect[4].setPosition(x, y);
+}
+
+void Rectangulo::setPosRect6(float x, float y)
+{
+    _rect[5].setPosition(x, y);
+}
+
+void Rectangulo::setPosCircle(float x, float y)
+{
+    _circ.setPosition(x, y);
+}
+
+//////////////////////////
+
+void Rectangulo::setSizeRect1(float x, float y)
+{
+    _rect[0].setSize(sf::Vector2f(x, y));
+}
+
+void Rectangulo::setSizeRect2(float x, float y)
+{
+    _rect[1].setSize(sf::Vector2f(x, y));
+}
+
+void Rectangulo::setSizeRect3(float x, float y)
+{
+    _rect[2].setSize(sf::Vector2f(x, y));
+}
+
+void Rectangulo::setSizeRect4(float x, float y)
+{
+    _rect[3].setSize(sf::Vector2f(x, y));
+}
+
+void Rectangulo::setSizeRect5(float x, float y)
+{
+    _rect[4].setSize(sf::Vector2f(x, y));
+}
+
+void Rectangulo::setSizeRect6(float x, float y)
+{
+    _rect[5].setSize(sf::Vector2f(x, y));
+}
+
+void Rectangulo::setSizeCircle(float s)
+{
+    _circ.setRadius(s);
 }

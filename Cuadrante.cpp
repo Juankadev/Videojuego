@@ -11,6 +11,16 @@ sf::FloatRect Cuadrante::getBounds() const
     return _cuadrante.getGlobalBounds();
 }
 
+void Cuadrante::setPos(float x, float y)
+{
+    _cuadrante.setPosition(x, y);
+}
+
+void Cuadrante::setRot(float r)
+{
+    _cuadrante.setRotation(r);
+}
+
 Cuadrante::Cuadrante()
 {
     _texture.loadFromFile("assets/cuadrante.png");

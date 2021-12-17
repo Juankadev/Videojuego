@@ -145,20 +145,26 @@
     <ClCompile Include="Auto.cpp" />
     <ClCompile Include="Collisionable.cpp" />
     <ClCompile Include="Cuadrante.cpp" />
+    <ClCompile Include="Enemigo.cpp" />
     <ClCompile Include="FinNivel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="NIvel1.cpp" />
+    <ClCompile Include="Nivel2.cpp" />
     <ClCompile Include="Rectangulo.cpp" />
+    <ClCompile Include="Vehiculo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Auto.h" />
     <ClInclude Include="Collisionable.h" />
     <ClInclude Include="Cuadrante.h" />
+    <ClInclude Include="Enemigo.h" />
     <ClInclude Include="FinNivel.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="NIvel1.h" />
+    <ClInclude Include="Nivel2.h" />
     <ClInclude Include="Rectangulo.h" />
+    <ClInclude Include="Vehiculo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

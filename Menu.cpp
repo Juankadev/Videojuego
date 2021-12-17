@@ -4,6 +4,8 @@ using namespace std;
 
 Menu::Menu()
 {
+	sound.setVolume(50);
+
 	opc1 = false;
 	opc2 = false;
 	opc3 = false;

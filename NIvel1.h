@@ -6,18 +6,22 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
-class NIvel1
+class NIvel1: public sf::Drawable
 {
-    private:
+    protected:
         Auto car;
         Rectangulo rect;
         Cuadrante cuadrante;
+        sf::RectangleShape fondo;
+        sf::Texture texturefondo;
+        //sf::Music music;
     
     public:
         NIvel1();
-        sf::RectangleShape fondo;
-        sf::Texture texturefondo;
-        sf::Music music;
-        
+        ~NIvel1();
+        void updates();
+        bool auto_estacionado();
+        void colisiones_auto_y_objetos();
+        void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 };
 

@@ -8,8 +8,8 @@ class Menu: public sf::Drawable
 		sf::RectangleShape _fondo;
 		sf::Texture _texture;
 		sf::Text _textPlay;
-		sf::Text _textControls;
-		sf::Text _textExit;
+		//sf::Text _textControls;
+		//sf::Text _textExit;
 		sf::Font _font;
 		float scale, sumar;
 		bool opc1, opc2, opc3;

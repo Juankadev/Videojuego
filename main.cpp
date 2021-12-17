@@ -10,36 +10,101 @@
 #include <Windows.h>
 #include <cstdlib>
 #include "FinNivel.h"
+#include "NIvel1.h"
+#include "Nivel2.h"
 
 using namespace std;
+
+/*
+class Enemy
+{
+private:
+    sf::Sprite _sprite;
+    sf::Texture _texture;
+    float _speed;
+
+public:
+    Enemy()
+    {
+        _speed = 0.1;
+        _sprite.setScale(1.1, 1.1);
+        _sprite.setPosition(0, 350);
+        //RANDOM TEXTURE
+        srand(time(NULL));
+        int ran;
+        ran = rand() % 3 + 1;
+
+        switch (ran)
+        {
+        case 1:
+            _texture.loadFromFile("assets/car6_purple.png");
+            break;
+        case 2:
+            _texture.loadFromFile("assets/car6_yellow.png");
+            break;
+        case 3:
+            _texture.loadFromFile("assets/car6_red.png");
+            break;
+        }
+        _sprite.setTexture(_texture);
+    }
+
+    void update()
+    {
+        _sprite.move(0.5, 0);
+        if (_sprite.getPosition().x > 600)
+        {
+            _sprite.setPosition(0, 350);
+        }
+    }
+};
+*/
+
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(600, 600), "SFML works!!");
     sf::View view(sf::FloatRect(600.f, 600.f, 600.f, 600.f));
 
-    //Auto car;
-    //Rectangulo rect;
-    //Cuadrante cuadrante;
+
+
+    //ESTE ENEMIGO DEBE CREARSE EN LA CLASE VEHICULOS
+    sf::Sprite enemy2;
+    sf::Texture _texture2;
+    float _speed2;
+    _speed2 = 0.1;
+    //enemy.setScale(1.1, 1.1);
+    enemy2.setPosition(650, 280);
+    enemy2.rotate(-90);
+    _texture2.loadFromFile("assets/car6_purple.png");
+    enemy2.setTexture(_texture2);
+
+
+
+
     Menu menu;
+    sf::Music music;
     FinNivel win;
-    
+    NIvel1 nivel1;
+    Nivel2 nivel2;
+
+
     bool dibujar = false;
     bool ganaste = false;
-    
-    //sf::RectangleShape fondo(sf::Vector2f(600, 600));
-    //sf::Texture texturefondo;
-    //texturefondo.loadFromFile("assets/Level1.png");
-    //fondo.setTexture(&texturefondo);
-    
-    sf::Music music;
+    int cambiarnivel = false;
+    int numerodenivel = 1;
+    bool ejecutado1 = false;
+    bool ejecutado2 = false;
+
+    //music
     if (!music.openFromFile("assets/music.wav"))
-    { cout << "Error al cargar la musica" << endl; }
+    {
+        cout << "Error al cargar la musica" << endl;
+    }
 
-    music.setVolume(5);
+    music.setVolume(10);
     music.setLoop(true);
-    //music.play();
-
+    music.play();
 
     while (window.isOpen())
     {
@@ -51,7 +116,9 @@ int main()
         }
 
         
-        //keyboards
+        //KEYBOARDS
+
+        //cuando apreto enter empieza el juego
         if (menu.seleccionar_opcion()==true) //si apretó enter
         {
             dibujar = true;
@@ -60,86 +127,108 @@ int main()
 
         
 
-        //updates
-        car.update();
+        //UPDATES
+        //car.update();
         menu.animationText();
-
-        //colision cuadrante para estacionar
-        if (cuadrante.getBounds().top < car.getBounds().top) //CALCULOS PARA SABER SI EL AUTO ENTRO AL CUADRANTE
-        {
-            if (cuadrante.getBounds().left < car.getBounds().left)
-            {
-                if (cuadrante.getBounds().left + cuadrante.getBounds().width > car.getBounds().left + car.getBounds().width)
-                {
-                    if (cuadrante.getBounds().top + cuadrante.getBounds().height > car.getBounds().top + car.getBounds().height)
-                    {
-                        //dibujar = false; //para dibujar el menu
-                        ganaste = true;
-                    }
-                }
-            }      
-        }
-        //colision objetos
-        if (car.getBounds().intersects(rect.getBounds()))
-        {
-            //fondo.setFillColor(sf::Color(255,255,255,50));
-            //car.getSoundChoque().play();
-            //dibujar = false;
-            car.posicionInicial();
-        }
-        if (car.getBounds().intersects(rect.getBounds1()))
-        {
-            //dibujar = false;
-            car.posicionInicial();
-        }
-        if (car.getBounds().intersects(rect.getBounds2()))
-        {
-            //dibujar = false;
-            car.posicionInicial();
-        }
-        if (car.getBounds().intersects(rect.getBounds3()))
-        {
-            //dibujar = false;
-            car.posicionInicial();
-        }
-        if (car.getBounds().intersects(rect.getBounds4()))
-        {
-            //dibujar = false;
-            car.posicionInicial();
-        }
-        if (car.getBounds().intersects(rect.getBounds5()))
-        {
-            //dibujar = false;
-            car.posicionInicial();
-        }
-
+        nivel1.updates();
+        nivel2.updates();
+        nivel2.updates2();
 
         
-        //
+
+        enemy2.move(-0.5, 0);
+        if (enemy2.getPosition().x < -100)
+        {
+            enemy2.setPosition(650, 280);
+        }
+
+        //colision cuadrante para estacionar
+        nivel1.auto_estacionado();
+        nivel2.auto_estacionado();
+
+        //colision objetos
+        nivel1.colisiones_auto_y_objetos();
+        nivel2.colisiones_auto_y_objetos2();
+        /*if (numerodenivel == 2)
+        {
+            if (nivel2.getBoundsAuto().intersects(enemy.getGlobalBounds()))
+            {
+                nivel2.posicionInicial(550, 500);
+            }
+        }
+        */
+
+        ////////////////
         window.clear();
 
 
         //DRAW
-        //window.setView(view1);
-        if (dibujar == true) //si apreto enter empieza el juego
+
+        //cuando apreto enter empieza el juego
+        if (dibujar == true) 
         {
-            //menu.draw(window);
-            window.draw(fondo);
-            //window.draw(cuadrante); //ver colision cuadrante
-            window.draw(rect); //ver colisiones
-            window.draw(car);
-            
+            switch (numerodenivel)
+            {
+            case 1:
+                window.draw(nivel1);
+                break;
+            case 2:
+                window.draw(nivel2);
+                window.draw(enemy2);
+                break;
+            }
         }
-        else //dibujar=false
+        else
         {
             window.draw(menu);
         }
 
-        //dibujar texto
-        if (ganaste == true)
+        //hacer que solo se ejecute una vez
+        //SI ESTACIONO BIEN
+
+        if (nivel1.auto_estacionado() == true)
         {
-            window.draw(win);
+            //para que se repita una vez el codigo de aumentar el nivel
+            if (ejecutado1 == false)
+            {
+                window.draw(win);
+                dibujar = false; //me lleva al menu
+                cambiarnivel = true;
+                ejecutado1 = true;
+            }
+            //nivel1.~NIvel1();
         }
+
+
+        if (nivel2.auto_estacionado() == true)
+        {
+            //para que se repita una vez el codigo de aumentar el nivel
+            if (ejecutado2 == false)
+            {
+                window.draw(win);
+                dibujar = false; //me lleva al menu
+                cambiarnivel = true;
+                ejecutado2 = true;
+            }
+            //nivel1.~NIvel1();
+        }
+
+
+
+        ///////////////////////////////
+        if (cambiarnivel == true)
+        {
+            cambiarnivel = false;
+            numerodenivel += 1;
+            //ejecutado = false;
+        }
+
+        if (numerodenivel == 3)
+        {
+            return 0;
+        }
+
+
         //
         window.display();
     }
