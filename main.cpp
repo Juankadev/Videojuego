@@ -63,7 +63,7 @@ public:
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(600, 600), "SFML works!!");
+    sf::RenderWindow window(sf::VideoMode(600, 600), "I DRIVE!");
     sf::View view(sf::FloatRect(600.f, 600.f, 600.f, 600.f));
 
 
@@ -147,7 +147,7 @@ int main()
         nivel2.auto_estacionado();
 
         //colision objetos
-        nivel1.colisiones_auto_y_objetos();
+        nivel1.colisiones_auto_y_objetos(100,100); //los parametros son los valores de respawn al colisionar
         nivel2.colisiones_auto_y_objetos2();
         /*if (numerodenivel == 2)
         {

@@ -7,14 +7,17 @@ Rectangulo::Rectangulo()
         _rect[i].setFillColor(sf::Color(255, 0, 0, 50));
     }
 
+    _circ.setFillColor(sf::Color(255, 0, 0, 100));
+
+    /*
     _rect[0].setSize({420,40});
     _rect[0].setPosition(0, 0);
     //
     _rect[5].setSize({ 420,40 });
     _rect[5].setPosition(0, 5);
     //
-    _rect[1].setSize({ 420,40 });
-    _rect[1].setPosition(0, 220);
+    _rect[1].setSize({ 410,40 });
+    _rect[1].setPosition(0, 200);
     //
     _rect[2].setSize({ 330,100 });
     _rect[2].setPosition(65, 240);
@@ -28,7 +31,7 @@ Rectangulo::Rectangulo()
     _circ.setRadius(65);
     _circ.setPosition(450, -30);
     _circ.setFillColor(sf::Color(255,0,0,100));
-    
+    */
 }
 
 void Rectangulo::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -74,6 +77,8 @@ sf::FloatRect Rectangulo::getBounds6()
 {
     return _rect[5].getGlobalBounds();
 }
+
+////////////////////////////////////////////////////
 
 void Rectangulo::setPosRect1(float x, float y)
 {
@@ -142,7 +147,7 @@ void Rectangulo::setSizeRect6(float x, float y)
     _rect[5].setSize(sf::Vector2f(x, y));
 }
 
-void Rectangulo::setSizeCircle(float s)
+void Rectangulo::setRadiusCircle(float s)
 {
     _circ.setRadius(s);
 }

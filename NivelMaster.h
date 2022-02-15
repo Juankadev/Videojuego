@@ -5,25 +5,23 @@
 #include "Rectangulo.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include "NivelMaster.h"
 
-class NIvel1: public NivelMaster
+class NivelMaster: public sf::Drawable
 {
     protected:
-        /*Auto car;
+        Auto car;
         Rectangulo rect;
         Cuadrante cuadrante;
         sf::RectangleShape fondo;
         sf::Texture texturefondo;
-        sf::Music music;*/
+        //sf::Music music;
 
     public:
-        /*NIvel1();
-        ~NIvel1();
+        NivelMaster();
+        ~NivelMaster();
         void updates();
         bool auto_estacionado();
-        void colisiones_auto_y_objetos();*/
-        NIvel1();
+        void colisiones_auto_y_objetos(int x, int y);
         void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 };
 

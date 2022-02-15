@@ -48,6 +48,9 @@
     <ClCompile Include="Vehiculo.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="NivelMaster.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Auto.h">
@@ -78,6 +81,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Vehiculo.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="NivelMaster.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

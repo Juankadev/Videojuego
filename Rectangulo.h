@@ -32,6 +32,6 @@ public:
 	void setSizeRect4(float x, float y);
 	void setSizeRect5(float x, float y);
 	void setSizeRect6(float x, float y);
-	void setSizeCircle(float s);
+	void setRadiusCircle(float s);
 };
 

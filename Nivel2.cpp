@@ -30,7 +30,7 @@ Nivel2::Nivel2()
     rect.setSizeRect5(180, 80);
     rect.setSizeRect6(96, 55);
     _rect7.setSize(sf::Vector2f(110, 60));
-    rect.setSizeCircle(43);
+    rect.setRadiusCircle(43);
 
     //cuadrante(donde estaciona)
     cuadrante.setPos(580, 72);
