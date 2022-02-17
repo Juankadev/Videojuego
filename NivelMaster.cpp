@@ -43,7 +43,7 @@ bool NivelMaster::auto_estacionado()
     return false;
 }
 
-void NivelMaster::colisiones_auto_y_objetos(int x, int y)
+void NivelMaster::colisiones_auto_y_objetos(float x, float y, float a)
 {
     //PARA MEJORAR, un for que pregunte por todas las intersecciones, hay que ir variando el numero de getBounds"1"
     //concatenar cadenas con strcpy
@@ -58,27 +58,29 @@ void NivelMaster::colisiones_auto_y_objetos(int x, int y)
     //}
     if (car.getBounds().intersects(rect.getBounds1()))
     {
-        car.posicionInicial(x, y);
+        //car.setPos(100, 100);
+        //car.setAngle(a);
+        car.respawn(x,y,a);
     }
     if (car.getBounds().intersects(rect.getBounds2()))
     {
-        car.posicionInicial(x, y);
+        car.respawn(x,y,a);
     }
     if (car.getBounds().intersects(rect.getBounds3()))
     {
-        car.posicionInicial(x, y);
+        car.respawn(x,y,a);
     }
     if (car.getBounds().intersects(rect.getBounds4()))
     {
-        car.posicionInicial(x, y);
+        car.respawn(x,y,a);
     }
     if (car.getBounds().intersects(rect.getBounds5()))
     {
-        car.posicionInicial(x, y);
+        car.respawn(x, y, a);
     }
     if (car.getBounds().intersects(rect.getBounds6()))
     {
-        car.posicionInicial(x, y);
+        car.respawn(x,y,a);
     }
 }
 
@@ -86,6 +88,11 @@ void NivelMaster::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(fondo, states);
     target.draw(cuadrante, states);
-    //target.draw(rect, states);
+    target.draw(rect, states); //muestra colisiones
     target.draw(car, states);
+}
+
+void NivelMaster::setAngleCar(float a)
+{
+    //car.setAngle(a);
 }

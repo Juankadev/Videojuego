@@ -13,6 +13,7 @@
 #include "NIvel1.h"
 #include "Nivel2.h"
 #include "Tutorial.h"
+#include "Vehiculo.h"
 
 using namespace std;
 
@@ -95,7 +96,7 @@ int main()
     bool dibujar_tuto = false;
     bool ganaste = false;
     int cambiarnivel = false;
-    int numerodenivel = 0;
+    int numerodenivel = 2;
     bool ejecutado1 = false;
     bool ejecutado2 = false;
 
@@ -159,8 +160,8 @@ int main()
         nivel2.auto_estacionado();
 
         //colision objetos
-        nivel1.colisiones_auto_y_objetos(100,100); //los parametros son los valores de respawn al colisionar
-        nivel2.colisiones_auto_y_objetos(500,500);
+        nivel1.colisiones_auto_y_objetos(100,100, 1.6); //los parametros son los valores de respawn al colisionar
+        nivel2.colisiones_auto_y_objetos(520,480, -1.6);
         /*if (numerodenivel == 2)
         {
             if (nivel2.getBoundsAuto().intersects(enemy.getGlobalBounds()))
@@ -190,10 +191,12 @@ int main()
         switch (numerodenivel) //para niveles
         {
             case 1:
+                //nivel1.setAngleCar(1.6);
                 window.draw(nivel1);   
                 break;
 
             case 2:
+                //nivel2.setAngleCar(-1.6);
                 window.draw(nivel2);
                 window.draw(enemy2);
                 break;

@@ -87,6 +87,7 @@ NIvel1::NIvel1()
     //car
     car.setPos(100, 100);
     car.setRot(90);
+    car.setAngle(1.6);
     //fondo
     texturefondo.loadFromFile("assets/Level1.png");
     fondo.setSize(sf::Vector2f(600, 600));
@@ -95,22 +96,22 @@ NIvel1::NIvel1()
     rect.setSizeRect1(410,40);
     rect.setPosRect1(0,0);
     
-    rect.setSizeRect2(410, 40);
-    rect.setPosRect2(0, 200);
+    rect.setSizeRect2(370, 40);
+    rect.setPosRect2(0, 210);
 
-    rect.setSizeRect3(330, 100);
+    rect.setSizeRect3(300, 80);
     rect.setPosRect3(65, 240);
 
-    rect.setSizeRect4(105, 100);
+    rect.setSizeRect4(90, 100);
     rect.setPosRect4(65, 480);
 
-    rect.setSizeRect5(200, 90);
-    rect.setPosRect5(235, 480);
+    rect.setSizeRect5(165, 90);
+    rect.setPosRect5(270, 480);
 
     rect.setSizeRect6(420, 40);
     rect.setPosRect6(0, 5);
 
-    rect.setPosCircle(450,-30);
+    rect.setPosCircle(473,-32);
     rect.setRadiusCircle(70);
 
     //NivelMaster::colisiones_auto_y_objetos(100, 100);

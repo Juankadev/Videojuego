@@ -16,7 +16,7 @@ class Nivel2 : public NivelMaster
     public:
         Nivel2();
         void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-        void colisiones_auto_y_objetos(int x, int y);
+        void colisiones_auto_y_objetos(float x, float y, float a);
         sf::FloatRect getBoundsAuto();
         void posicionInicial(float x, float y);
         void updates2();

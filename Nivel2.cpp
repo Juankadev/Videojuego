@@ -5,8 +5,10 @@ using namespace std;
 Nivel2::Nivel2()
 {
     //car
-    car.setPos(500, 500);
-    car.setRot(-90);
+    //car.setPos(530, 400);
+    //car.setRot(-90);
+    car.setAngle(-1.6);
+    cout << "l2" << endl;
     //fondo
     texturefondo.loadFromFile("assets/Level2.png");
     fondo.setSize(sf::Vector2f(600, 600));
@@ -18,17 +20,17 @@ Nivel2::Nivel2()
     rect.setPosRect3(490, 0);
     rect.setPosRect4(150,410);
     rect.setPosRect5(340, 550);
-    rect.setPosRect6(266, 70);
+    rect.setPosRect6(275, 80);
     rect.setPosCircle(130, 420);
-    _rect7.setPosition(490,135);
+    _rect7.setPosition(490,145);
 
-    rect.setSizeRect2(110,180);
-    rect.setSizeRect3(110, 60);
+    rect.setSizeRect2(110,160);
+    rect.setSizeRect3(110, 45);
     rect.setSizeRect4(500, 33);
     rect.setSizeRect5(180, 80);
-    rect.setSizeRect6(96, 55);
+    rect.setSizeRect6(70, 40);
 
-    _rect7.setSize(sf::Vector2f(110, 60));
+    _rect7.setSize(sf::Vector2f(110, 40));
     rect.setRadiusCircle(43);
 
     //cuadrante(donde estaciona)
@@ -39,20 +41,13 @@ Nivel2::Nivel2()
 
 void Nivel2::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    /*target.draw(fondo, states);
-    target.draw(cuadrante, states);
-    target.draw(rect, states);
-    target.draw(_rect7, states);
-    target.draw(car, states);
-    target.draw(vehiculo, states);
-    */
-
     NivelMaster::draw(target, states);
     target.draw(vehiculo, states);
+    //target.draw(_rect7, states);
 }
 
 
-void Nivel2::colisiones_auto_y_objetos(int x, int y)
+void Nivel2::colisiones_auto_y_objetos(float x, float y, float a)
 {
     //colision objetos
     //if (car.getBounds().intersects(rect.getBounds()))
@@ -62,11 +57,12 @@ void Nivel2::colisiones_auto_y_objetos(int x, int y)
         //dibujar = false;
         //car.posicionInicial();
     //}
-    NivelMaster::colisiones_auto_y_objetos(500, 500);
+    NivelMaster::colisiones_auto_y_objetos(x, y, a);
 
     if (car.getBounds().intersects(_rect7.getGlobalBounds()))
     {
-        car.posicionInicial(500, 500);
+        car.respawn(x,y,-a);
+        car.setAngle(a);
     }
 }
 
