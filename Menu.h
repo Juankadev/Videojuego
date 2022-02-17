@@ -4,7 +4,7 @@
 
 class Menu: public sf::Drawable
 {
-	private:
+	protected:
 		sf::RectangleShape _fondo;
 		sf::Texture _texture;
 		sf::Text _textPlay;

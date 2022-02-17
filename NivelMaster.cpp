@@ -86,6 +86,6 @@ void NivelMaster::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(fondo, states);
     target.draw(cuadrante, states);
-    target.draw(rect, states);
+    //target.draw(rect, states);
     target.draw(car, states);
 }

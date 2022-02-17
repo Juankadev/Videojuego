@@ -153,6 +153,7 @@
     <ClCompile Include="Nivel2.cpp" />
     <ClCompile Include="NivelMaster.cpp" />
     <ClCompile Include="Rectangulo.cpp" />
+    <ClCompile Include="Tutorial.cpp" />
     <ClCompile Include="Vehiculo.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +167,7 @@
     <ClInclude Include="Nivel2.h" />
     <ClInclude Include="NivelMaster.h" />
     <ClInclude Include="Rectangulo.h" />
+    <ClInclude Include="Tutorial.h" />
     <ClInclude Include="Vehiculo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

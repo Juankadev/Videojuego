@@ -81,10 +81,13 @@ void NIvel1::colisiones_auto_y_objetos()
     }
 }
 */
+
 NIvel1::NIvel1()
 {
+    //car
     car.setPos(100, 100);
     car.setRot(90);
+    //fondo
     texturefondo.loadFromFile("assets/Level1.png");
     fondo.setSize(sf::Vector2f(600, 600));
     fondo.setTexture(&texturefondo);

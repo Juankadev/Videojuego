@@ -12,6 +12,7 @@
 #include "FinNivel.h"
 #include "NIvel1.h"
 #include "Nivel2.h"
+#include "Tutorial.h"
 
 using namespace std;
 
@@ -63,7 +64,7 @@ public:
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(600, 600), "I DRIVE!");
+    sf::RenderWindow window(sf::VideoMode(600, 600), "I DRIVE!", sf::Style::Titlebar | sf::Style::Close);
     sf::View view(sf::FloatRect(600.f, 600.f, 600.f, 600.f));
 
 
@@ -87,12 +88,14 @@ int main()
     FinNivel win;
     NIvel1 nivel1;
     Nivel2 nivel2;
+    Tutorial tutorial;
 
 
     bool dibujar = false;
+    bool dibujar_tuto = false;
     bool ganaste = false;
     int cambiarnivel = false;
-    int numerodenivel = 1;
+    int numerodenivel = 0;
     bool ejecutado1 = false;
     bool ejecutado2 = false;
 
@@ -121,15 +124,24 @@ int main()
         //cuando apreto enter empieza el juego
         if (menu.seleccionar_opcion()==true) //si apretó enter
         {
-            dibujar = true;
+            dibujar_tuto = true;
             //music.resetBuffer();
         }
+
+        if (tutorial.seleccionar_opcion() == true)
+        {
+            dibujar = true; //dibuja el juego
+            dibujar_tuto = true; //no se vuelve a dibujar el tutorial
+            numerodenivel = 1;
+        }
+
 
         
 
         //UPDATES
         //car.update();
         menu.animationText();
+        tutorial.animationText();
         nivel1.updates();
         nivel2.updates();
         nivel2.updates2();
@@ -148,7 +160,7 @@ int main()
 
         //colision objetos
         nivel1.colisiones_auto_y_objetos(100,100); //los parametros son los valores de respawn al colisionar
-        nivel2.colisiones_auto_y_objetos2();
+        nivel2.colisiones_auto_y_objetos(500,500);
         /*if (numerodenivel == 2)
         {
             if (nivel2.getBoundsAuto().intersects(enemy.getGlobalBounds()))
@@ -165,23 +177,28 @@ int main()
         //DRAW
 
         //cuando apreto enter empieza el juego
-        if (dibujar == true) 
+
+        if (dibujar_tuto == false)
         {
-            switch (numerodenivel)
-            {
+            window.draw(menu);
+        }
+        else
+        {
+            window.draw(tutorial);
+        }
+        //////////
+        switch (numerodenivel) //para niveles
+        {
             case 1:
-                window.draw(nivel1);
+                window.draw(nivel1);   
                 break;
+
             case 2:
                 window.draw(nivel2);
                 window.draw(enemy2);
                 break;
-            }
         }
-        else
-        {
-            window.draw(menu);
-        }
+
 
         //hacer que solo se ejecute una vez
         //SI ESTACIONO BIEN
@@ -231,6 +248,7 @@ int main()
 
         //
         window.display();
+    
     }
 
     return 0;

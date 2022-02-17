@@ -4,6 +4,9 @@ using namespace std;
 
 Menu::Menu()
 {
+	//_textPlay.setOrigin(_textPlay.getScale().x / 2, _textPlay.getScale().y / 2);
+	_textPlay.setOrigin(88, 12);
+
 	sound.setVolume(50);
 
 	opc1 = false;
@@ -26,16 +29,16 @@ Menu::Menu()
 		// error...
 	}
 
-	scale = 0.0005;
+	scale = 0.0002;
 	sumar = true;
 
 	_textPlay.setFont(_font);
-	_textPlay.setString("Jugar");
+	_textPlay.setString("Jugar - 'Z' ");
 	_textPlay.setCharacterSize(30);
 	_textPlay.setFillColor(sf::Color::Yellow);
 	_textPlay.setOutlineColor(sf::Color::Black);
 	_textPlay.setOutlineThickness(2);
-	_textPlay.setPosition(230,380);
+	_textPlay.setPosition(300,380);
 
 	//_textControls.setFont(_font);
 	//_textControls.setString("Controles");
@@ -80,7 +83,7 @@ bool Menu::seleccionar_opcion()
 		opc1 == true;
 	}*/
 	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
 	{
 		sound.play();
 		return true;
@@ -88,6 +91,8 @@ bool Menu::seleccionar_opcion()
 
 	return false;
 }
+
+//funcion silenciar sonidos??
 
 void Menu::animationText()
 {
