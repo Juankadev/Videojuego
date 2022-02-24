@@ -14,16 +14,16 @@ class NivelMaster: public sf::Drawable
         Cuadrante cuadrante;
         sf::RectangleShape fondo;
         sf::Texture texturefondo;
+        int cant_choques;
         //sf::Music music;
 
     public:
         NivelMaster();
-        ~NivelMaster();
         void updates();
         bool auto_estacionado();
         void colisiones_auto_y_objetos(float x, float y, float a);
         void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
         void setAngleCar(float a);
-
+        int getCantChoques();
 };
 

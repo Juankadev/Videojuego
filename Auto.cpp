@@ -12,7 +12,7 @@ Auto::Auto()
     //_angle = 0.01;
     //_sprite.setScale(1.1, 1.1);
 
-    //view1.setSize(200.f, 200.f);
+    view1.setSize(200.f, 200.f);
     //_sprite.setRotation(90);
 
     //RANDOM TEXTURE
@@ -51,15 +51,23 @@ Auto::Auto()
         cout << "Error sound choque" << endl;
     }
     choque.setBuffer(bufferchoque);*/
+
+    if (!sound_driving_buffer.loadFromFile("assets/sound_driving.ogg"))
+    {
+        cout << "Error al cargar sound driving" << endl;
+    }
+    sound_driving.setBuffer(sound_driving_buffer);
+    sound_driving.setVolume(50);
+    play = 0;
     
     x = 100;
     y = 100;
     speed = 0;
     //angle = 1.6;
-    maxSpeed = 0.75;
-    acc = 0.006;
-    dec = 0.006;
-    turnSpeed = 0.0025;
+    maxSpeed = 0.45;
+    acc = 0.004;
+    dec = 0.004;
+    turnSpeed = 0.004;
 }
 
 void Auto::update()
@@ -71,13 +79,37 @@ void Auto::update()
     //_posY = 0;
     //_posX = 0;
 
-
     bool Up=0, Down=0, Left=0, Right=0;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))      Up = 1;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))     {Up = 1;}
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))    Down = 1;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))    Left = 1;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))   Right = 1;
 
+    //SOUND MOVEMENT
+    if (Up || Down)
+    {
+        if (play == 0)
+        {
+            if(Up)
+            {
+                sound_driving.setPitch(1.5);
+            }
+            if (Down)
+            {
+                sound_driving.setPitch(1);
+            }
+            
+            sound_driving.play();
+            play++;
+        }
+    }
+    else
+    {
+        sound_driving.stop();
+        play = 0;
+    }
+    //
+    
 
     //car movement
     if (Up && speed < maxSpeed)

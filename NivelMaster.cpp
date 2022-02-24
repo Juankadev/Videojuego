@@ -1,5 +1,6 @@
 #include "NivelMaster.h"
 #include <iostream>
+#include <windows.h>
 using namespace std;
 
 NivelMaster::NivelMaster()
@@ -9,12 +10,17 @@ NivelMaster::NivelMaster()
     //texturefondo.loadFromFile("assets/Level1.png");
     //fondo.setSize(sf::Vector2f(600, 600));
     //fondo.setTexture(&texturefondo);
+    cant_choques = 0;
+
+    /*if (!music.openFromFile("assets/music.wav"))
+    {
+        cout << "Error al cargar la musica" << endl;
+    }
+    music.setVolume(10);
+    music.setLoop(true);
+    music.play();*/
 }
 
-NivelMaster::~NivelMaster()
-{
-    cout << "Destruccion nivel" << endl;
-}
 
 void NivelMaster::updates()
 {
@@ -61,26 +67,39 @@ void NivelMaster::colisiones_auto_y_objetos(float x, float y, float a)
         //car.setPos(100, 100);
         //car.setAngle(a);
         car.respawn(x,y,a);
+
+        cant_choques++;
+        cout << "Intersecta" << endl;
     }
     if (car.getBounds().intersects(rect.getBounds2()))
     {
         car.respawn(x,y,a);
+        cant_choques++;
+        cout << "Intersecta" << endl;
     }
     if (car.getBounds().intersects(rect.getBounds3()))
     {
         car.respawn(x,y,a);
+        cant_choques++;
+        cout << "Intersecta" << endl;
     }
     if (car.getBounds().intersects(rect.getBounds4()))
     {
         car.respawn(x,y,a);
+        cant_choques++;
+        cout << "Intersecta" << endl;
     }
     if (car.getBounds().intersects(rect.getBounds5()))
     {
         car.respawn(x, y, a);
+        cant_choques++;
+        cout << "Intersecta" << endl;
     }
     if (car.getBounds().intersects(rect.getBounds6()))
     {
         car.respawn(x,y,a);
+        cant_choques++;
+        cout << "Intersecta" << endl;
     }
 }
 
@@ -88,11 +107,16 @@ void NivelMaster::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(fondo, states);
     target.draw(cuadrante, states);
-    target.draw(rect, states); //muestra colisiones
+    //target.draw(rect, states); //muestra colisiones
     target.draw(car, states);
 }
 
 void NivelMaster::setAngleCar(float a)
 {
     //car.setAngle(a);
+}
+
+int NivelMaster::getCantChoques()
+{
+    return cant_choques;
 }

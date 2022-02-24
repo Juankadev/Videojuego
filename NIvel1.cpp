@@ -85,7 +85,7 @@ void NIvel1::colisiones_auto_y_objetos()
 NIvel1::NIvel1()
 {
     //car
-    car.setPos(100, 100);
+    //car.setPos(100, 100);
     car.setRot(90);
     car.setAngle(1.6);
     //fondo

@@ -2,6 +2,7 @@
 #include <SFML/Audio.hpp>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
+#include <ctime> 
 #include <iostream>
 #include "Auto.h"
 #include "Rectangulo.h"
@@ -14,53 +15,10 @@
 #include "Nivel2.h"
 #include "Tutorial.h"
 #include "Vehiculo.h"
+#include "NivelMaster.h"
+#include <windows.h>
 
 using namespace std;
-
-/*
-class Enemy
-{
-private:
-    sf::Sprite _sprite;
-    sf::Texture _texture;
-    float _speed;
-
-public:
-    Enemy()
-    {
-        _speed = 0.1;
-        _sprite.setScale(1.1, 1.1);
-        _sprite.setPosition(0, 350);
-        //RANDOM TEXTURE
-        srand(time(NULL));
-        int ran;
-        ran = rand() % 3 + 1;
-
-        switch (ran)
-        {
-        case 1:
-            _texture.loadFromFile("assets/car6_purple.png");
-            break;
-        case 2:
-            _texture.loadFromFile("assets/car6_yellow.png");
-            break;
-        case 3:
-            _texture.loadFromFile("assets/car6_red.png");
-            break;
-        }
-        _sprite.setTexture(_texture);
-    }
-
-    void update()
-    {
-        _sprite.move(0.5, 0);
-        if (_sprite.getPosition().x > 600)
-        {
-            _sprite.setPosition(0, 350);
-        }
-    }
-};
-*/
 
 
 int main()
@@ -68,48 +26,52 @@ int main()
     sf::RenderWindow window(sf::VideoMode(600, 600), "I DRIVE!", sf::Style::Titlebar | sf::Style::Close);
     sf::View view(sf::FloatRect(600.f, 600.f, 600.f, 600.f));
 
-
-
-    //ESTE ENEMIGO DEBE CREARSE EN LA CLASE VEHICULOS
-    sf::Sprite enemy2;
-    sf::Texture _texture2;
-    float _speed2;
-    _speed2 = 0.1;
-    //enemy.setScale(1.1, 1.1);
-    enemy2.setPosition(650, 280);
-    enemy2.rotate(-90);
-    _texture2.loadFromFile("assets/car6_purple.png");
-    enemy2.setTexture(_texture2);
-
-
-
-
     Menu menu;
-    sf::Music music;
     FinNivel win;
     NIvel1 nivel1;
     Nivel2 nivel2;
     Tutorial tutorial;
+    NivelMaster master;
 
 
     bool dibujar = false;
     bool dibujar_tuto = false;
     bool ganaste = false;
     int cambiarnivel = false;
-    int numerodenivel = 2;
+    int numerodenivel = 1;
     bool ejecutado1 = false;
     bool ejecutado2 = false;
+    int contmenu = 0;
 
-    //music
-    if (!music.openFromFile("assets/music.wav"))
+    //---------M U S I C A-----------------------------------//
+    //Music Menu
+    sf::Music music_menu;
+    if (!music_menu.openFromFile("assets/music_menu.ogg"))
+    {cout << "Error al cargar la musica menu" << endl;}
+    music_menu.setVolume(20);////////////
+    music_menu.setLoop(true);
+    music_menu.play();
+
+    //Music Game
+    sf::Music music_game;
+    if (!music_game.openFromFile("assets/music.wav"))
+    {cout << "Error al cargar la musica game" << endl;}
+    music_game.setVolume(10);////////////////
+    music_game.setLoop(true);
+
+    //Sound Win
+    sf::SoundBuffer sound_win_buffer;
+    if (!sound_win_buffer.loadFromFile("assets/sound_win.ogg"))
     {
-        cout << "Error al cargar la musica" << endl;
+        cout << "Error al cargar sound win" << endl;
     }
 
-    music.setVolume(10);
-    music.setLoop(true);
-    music.play();
+    sf::Sound sound_win;
+    sound_win.setBuffer(sound_win_buffer);
+    sound_win.setVolume(40);
 
+    
+    //----------------------------------------------------------------------------------
     while (window.isOpen())
     {
         sf::Event event;
@@ -119,57 +81,67 @@ int main()
                 window.close();
         }
 
-        
+
+
         //KEYBOARDS
 
         //cuando apreto enter empieza el juego
-        if (menu.seleccionar_opcion()==true) //si apretó enter
+        
+        if (contmenu == 0)
         {
-            dibujar_tuto = true;
-            //music.resetBuffer();
+            if (menu.seleccionar_opcion()) //si apretó enter
+            {
+                dibujar_tuto = true;
+                //music.resetBuffer();
+                contmenu++;
+            }
         }
 
-        if (tutorial.seleccionar_opcion() == true)
+        if (contmenu < 2) //para apretar salir en el menu y en el tutorial
+        {
+            if (menu.seleccionar_opcion()==2) //si apretó 'S' sale
+            {
+                contmenu++;
+                break;
+                //music.resetBuffer();
+            }
+        }
+
+
+        if (tutorial.seleccionar_opcion())
         {
             dibujar = true; //dibuja el juego
             dibujar_tuto = true; //no se vuelve a dibujar el tutorial
             numerodenivel = 1;
+            contmenu++;
+            cout << "TUTORIAL" << endl;
+            music_menu.stop();
+            music_game.play();
         }
 
 
         
 
         //UPDATES
-        //car.update();
+
         menu.animationText();
         tutorial.animationText();
-        nivel1.updates();
-        nivel2.updates();
-        nivel2.updates2();
 
-        
-
-        enemy2.move(-0.5, 0);
-        if (enemy2.getPosition().x < -100)
+        switch (numerodenivel) //para niveles
         {
-            enemy2.setPosition(650, 280);
-        }
+        case 1:
+            nivel1.updates();
+            nivel1.auto_estacionado();//colision cuadrante para estacionar
+            nivel1.colisiones_auto_y_objetos(100, 100, 1.6); //los parametros son los valores de respawn al colisionar
+            break;
 
-        //colision cuadrante para estacionar
-        nivel1.auto_estacionado();
-        nivel2.auto_estacionado();
-
-        //colision objetos
-        nivel1.colisiones_auto_y_objetos(100,100, 1.6); //los parametros son los valores de respawn al colisionar
-        nivel2.colisiones_auto_y_objetos(520,480, -1.6);
-        /*if (numerodenivel == 2)
-        {
-            if (nivel2.getBoundsAuto().intersects(enemy.getGlobalBounds()))
-            {
-                nivel2.posicionInicial(550, 500);
-            }
+        case 2:
+            nivel2.updates();
+            nivel2.auto_estacionado();//colision cuadrante para estacionar
+            nivel2.colisiones_auto_y_objetos(540, 480, -1.6);//colision objetos
+            break;
         }
-        */
+         
 
         ////////////////
         window.clear();
@@ -191,14 +163,11 @@ int main()
         switch (numerodenivel) //para niveles
         {
             case 1:
-                //nivel1.setAngleCar(1.6);
                 window.draw(nivel1);   
                 break;
 
             case 2:
-                //nivel2.setAngleCar(-1.6);
                 window.draw(nivel2);
-                window.draw(enemy2);
                 break;
         }
 
@@ -211,10 +180,12 @@ int main()
             //para que se repita una vez el codigo de aumentar el nivel
             if (ejecutado1 == false)
             {
-                window.draw(win);
-                dibujar = false; //me lleva al menu
+                //window.draw(win);
+                //dibujar = false; //me lleva al menu
                 cambiarnivel = true;
                 ejecutado1 = true;
+                sound_win.play();
+                Sleep(1000);
             }
             //nivel1.~NIvel1();
         }
@@ -225,10 +196,12 @@ int main()
             //para que se repita una vez el codigo de aumentar el nivel
             if (ejecutado2 == false)
             {
-                window.draw(win);
-                dibujar = false; //me lleva al menu
+                //window.draw(win);
+                //dibujar = false; //me lleva al menu
                 cambiarnivel = true;
                 ejecutado2 = true;
+                sound_win.play();
+                Sleep(1000);
             }
             //nivel1.~NIvel1();
         }
@@ -245,14 +218,19 @@ int main()
 
         if (numerodenivel == 3)
         {
-            return 0;
+            dibujar_tuto = false;
+            numerodenivel = 0;
+            contmenu = 0;
+            menu.setCont(0); //resetea el contador de cuando se apreta enter, para que no se ejecute varias veces
+            tutorial.setCont(0);
+            music_game.stop();
+            music_menu.play();
         }
-
-
         //
         window.display();
-    
     }
 
+    cout << "Choques NIVEL 1: " << nivel1.getCantChoques() << endl;
+    cout << "Choques NIVEL 2: " << nivel2.getCantChoques() << endl;
     return 0;
 }

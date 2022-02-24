@@ -8,6 +8,11 @@ class Auto : public sf::Drawable, public Collisionable
 private:
 	sf::Sprite _sprite;
 	sf::Texture _texture;
+	sf::View view1;
+	sf::SoundBuffer sound_driving_buffer;
+	sf::Sound sound_driving;
+	int play;
+
 	/*float _velocityX;
 	float _velocityY;
 	float _angle;
