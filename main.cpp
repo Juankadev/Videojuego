@@ -38,7 +38,7 @@ int main()
     bool dibujar_tuto = false;
     bool ganaste = false;
     int cambiarnivel = false;
-    int numerodenivel = 1;
+    int numerodenivel = 0;
     bool ejecutado1 = false;
     bool ejecutado2 = false;
     int contmenu = 0;
@@ -70,6 +70,8 @@ int main()
     sound_win.setBuffer(sound_win_buffer);
     sound_win.setVolume(40);
 
+
+    //cout << "Menu: " << menu.getChoques() << endl;
     
     //----------------------------------------------------------------------------------
     while (window.isOpen())
@@ -123,12 +125,12 @@ int main()
         
 
         //UPDATES
-
-        menu.animationText();
-        tutorial.animationText();
-
         switch (numerodenivel) //para niveles
         {
+        case 0:
+            menu.animationText();
+            tutorial.animationText();
+            break;
         case 1:
             nivel1.updates();
             nivel1.auto_estacionado();//colision cuadrante para estacionar
@@ -225,12 +227,13 @@ int main()
             tutorial.setCont(0);
             music_game.stop();
             music_menu.play();
+            menu.grabarEnDisco(nivel1.getCantChoques() + nivel2.getCantChoques()); //grabo la cantidad de choques
+            nivel1.setCantChoques(0); //reinicio valor para la proxima partida
+            nivel2.setCantChoques(0); //reinicio valor para la proxima partida
         }
         //
         window.display();
     }
 
-    cout << "Choques NIVEL 1: " << nivel1.getCantChoques() << endl;
-    cout << "Choques NIVEL 2: " << nivel2.getCantChoques() << endl;
     return 0;
 }

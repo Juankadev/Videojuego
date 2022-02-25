@@ -116,7 +116,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -146,6 +146,7 @@
     <ClCompile Include="Collisionable.cpp" />
     <ClCompile Include="Cuadrante.cpp" />
     <ClCompile Include="Enemigo.cpp" />
+    <ClCompile Include="Estadisticas.cpp" />
     <ClCompile Include="FinNivel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Collisionable.h" />
     <ClInclude Include="Cuadrante.h" />
     <ClInclude Include="Enemigo.h" />
+    <ClInclude Include="Estadisticas.h" />
     <ClInclude Include="FinNivel.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="NIvel1.h" />

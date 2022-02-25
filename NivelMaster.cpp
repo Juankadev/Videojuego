@@ -120,3 +120,8 @@ int NivelMaster::getCantChoques()
 {
     return cant_choques;
 }
+
+void NivelMaster::setCantChoques(int c)
+{
+    cant_choques = c;
+}

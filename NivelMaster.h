@@ -15,7 +15,7 @@ class NivelMaster: public sf::Drawable
         sf::RectangleShape fondo;
         sf::Texture texturefondo;
         int cant_choques;
-        //sf::Music music;
+        //int seg;
 
     public:
         NivelMaster();
@@ -25,5 +25,6 @@ class NivelMaster: public sf::Drawable
         void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
         void setAngleCar(float a);
         int getCantChoques();
+        void setCantChoques(int c);
 };
 
