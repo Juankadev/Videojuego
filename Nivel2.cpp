@@ -4,13 +4,13 @@ using namespace std;
 
 Nivel2::Nivel2()
 {
-    enemy1.setPos(0, 350);
-    enemy1.setMove(0.4);
+    enemy1.setPos(0, 330);
+    enemy1.setMove(0.6);
     enemy1.setRot(90);
     enemy1.setRespawn(0, 350);
 
     enemy2.setPos(650, 270);
-    enemy2.setMove(0.6);
+    enemy2.setMove(0.7);
     enemy2.setRot(90);
     enemy2.setRespawn(-200, 270);
     //car

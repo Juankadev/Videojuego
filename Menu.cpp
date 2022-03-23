@@ -18,7 +18,22 @@ Menu::Menu()
 	fclose(f);*/
 	buscarmax();
 	//strChoques = to_string(choques);
-	todosLosChoques();
+	elementos = cantElementos();
+	_datos = new sf::Text[elementos];
+
+	f = fopen("archivos/estadisticas.txt", "rb");
+	if (f == NULL) { cout << "Error de apertura" << endl; }
+
+	int aux;
+
+	for (int i = 0; i < elementos; i++)
+	{
+		fseek(f, sizeof(int) * i, 0);
+		fread(&aux, sizeof(int), 1, f);
+		_datos[i].setString(to_string(aux));
+	}
+
+	fclose(f);
 
 
 	cont = 0;
@@ -239,10 +254,12 @@ void Menu::grabarEnDisco(int c)
 	fwrite(&c, sizeof(int), 1, f);
 	fclose(f);
 
+	//agrando memoria dinamica de datos de choques
+
 	//seteo en el menu el maximo valor
 	buscarmax();
 	//actualizar rank
-	
+	//delete _datos;
 	todosLosChoques();
 }
 
@@ -282,17 +299,16 @@ int Menu::cantElementos()
 	return bytes;
 }
 
-
-void Menu::todosLosChoques()
+void Menu::todosLosChoques() //VER PROBLEMA DE MEMORIA DINAMICA
 {
-	elementos = cantElementos();
-	_datos = new sf::Text[elementos];
-
 	f = fopen("archivos/estadisticas.txt", "rb");
 	if (f == NULL) { cout << "Error de apertura" << endl; }
 
 	int aux;
-	
+	//HAY QUE AGRANDAR LA MEMORIA DINAMICA LUEGO DE GUARDAR PARTIDA CON EL NUEVO DATO
+	elementos = cantElementos(); //PROBLEMA PARA MOSTRAR EN MENU
+	_datos = new sf::Text[elementos];//PROBLEMA PARA MOSTRAR EN MENU
+
 	for (int i = 0; i < elementos; i++)
 	{
 		fseek(f, sizeof(int) * i, 0);

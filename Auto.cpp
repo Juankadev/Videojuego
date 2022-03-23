@@ -57,16 +57,16 @@ Auto::Auto()
         cout << "Error al cargar sound driving" << endl;
     }
     sound_driving.setBuffer(sound_driving_buffer);
-    sound_driving.setVolume(50);
+    sound_driving.setVolume(100);
     play = 0;
     
     x = 100;
     y = 100;
     speed = 0;
     //angle = 1.6;
-    maxSpeed = 0.45;
-    acc = 0.004;
-    dec = 0.004;
+    maxSpeed = 0.5;
+    acc = 0.005;
+    dec = 0.005;
     turnSpeed = 0.004;
 }
 

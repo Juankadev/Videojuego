@@ -23,7 +23,20 @@ Tutorial::Tutorial()
 
 void Tutorial::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	Menu::draw(target,states);
+	//Menu::draw(target,states);
+	target.draw(_fondo, states);
+	target.draw(_textPlay, states);
+	target.draw(img_play, states);
+	target.draw(_textExit, states);
+	target.draw(img_s, states);
+	//target.draw(_text_cant_choques, states);
+	//target.draw(_text_num_choques, states);
+	//target.draw(_fondo_estadistica, states);
+	//target.draw(_estadisticas, states);
+	/*for (int i = 0; i < elementos; i++)
+	{
+		target.draw(_datos[i], states);
+	}*/
 	target.draw(teclas, states);
 }
 
